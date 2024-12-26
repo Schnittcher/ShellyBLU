@@ -1,0 +1,12 @@
+{
+    "id": "{4B0D1479-DF49-227D-D5BD-1DBF51D4FF02}",
+    "name": "Shelly BLU",
+    "author": "Kai Schnittcher",
+    "url": "https://github.com/Schnittcher/ShellyBLU",
+    "compatibility": {
+        "version": "7.0"
+    },
+    "version": "1.0",
+    "build": 0,
+    "date": 0
+}
