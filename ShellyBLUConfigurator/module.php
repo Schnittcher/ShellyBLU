@@ -62,12 +62,6 @@ class ShellyBLUConfigurator extends IPSModule
                                 if (array_key_exists('humidity', $data)) {
                                     $devcieType = 'Shelly BLU H&T';
                                 }
-                                for ($i=200; $i < 204 ; $i++) { 
-                                    if (array_key_exists('blutrv:'.$i, $data)) {
-                                        $devcieType = 'Shelly BLU TRV';
-                                    }
-                                    $i++;
-                                }
 
                                 if (!array_key_exists($data['address'], $Devices)) {
                                     $Devices[$data['address']] = $devcieType;
@@ -160,17 +154,6 @@ class ShellyBLUConfigurator extends IPSModule
                             'configuration' => [
                                 'BLUAddress' => $BLUAddress,
                                 'Event'      => 'shelly-blu'
-                            ]
-                        ];
-                        break;
-                    case 'Shelly BLU TRV':
-                        $moduleID = '{1B97B99F-729C-4985-310F-957B93DBE27F}';
-                        $DeviceType = $Device;
-                        $AddValue['create'] = [
-                            'moduleID'      => $moduleID,
-                            'info'          => $BLUAddress,
-                            'configuration' => [
-                                'BLUAddress' => $BLUAddress,
                             ]
                         ];
                         break;
