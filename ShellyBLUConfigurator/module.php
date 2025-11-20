@@ -45,7 +45,6 @@ class ShellyBLUConfigurator extends IPSModule
                         if (array_key_exists('data', $Payload['params']['events'][0])) {
                             if (array_key_exists('data', $Payload['params']['events'][0])) {
                                 $data = $Payload['params']['events'][0]['data'];
-
                                 $DeviceType = '';
                                 if (array_key_exists('button', $data)) {
                                     $devcieType = 'Shelly BLU Button 1';
@@ -64,7 +63,9 @@ class ShellyBLUConfigurator extends IPSModule
                                 }
 
                                 if (!array_key_exists($data['address'], $Devices)) {
-                                    $Devices[$data['address']] = $devcieType;
+                                    if ($devcieType != '') {
+                                        $Devices[$data['address']] = $devcieType;
+                                    }
                                 }
                             }
                         }
@@ -167,6 +168,7 @@ class ShellyBLUConfigurator extends IPSModule
             }
             $Form['actions'][0]['values'] = $Values;
         }
+        IPS_LogMessage('from', print_r($Form,true));
         return json_encode($Form);
     }
 
@@ -174,11 +176,10 @@ class ShellyBLUConfigurator extends IPSModule
     {
         $InstanceIDs = [];
 
-        
         //Shelly BLU Button 1
         $InstanceIDs[] = IPS_GetInstanceListByModuleID('{5E02DB53-B7BD-4479-AC5C-09E7519BD89F}');
 
-        //Shelly BLU RC Button 4 
+        //Shelly BLU RC Button 4
         $InstanceIDs[] = IPS_GetInstanceListByModuleID('{C99EAB02-DEF7-25CF-6453-5C8F1E3A27B7}');
 
         //Shelly BLU Door/Window
