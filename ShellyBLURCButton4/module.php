@@ -48,10 +48,18 @@ class ShellyBLURCButton4 extends ShellyModuleBLU
                                     $this->SetValue('Shelly_Battery', $Payload->params->events[0]->data->battery);
                                 }
                                 if (property_exists($Payload->params->events[0]->data, 'button')) {
-                                    $this->SetValue('Shelly_Button', $Payload->params->events[0]->data->button[0]);
-                                    $this->SetValue('Shelly_Button1', $Payload->params->events[0]->data->button[1]);
-                                    $this->SetValue('Shelly_Button2', $Payload->params->events[0]->data->button[2]);
-                                    $this->SetValue('Shelly_Button3', $Payload->params->events[0]->data->button[3]);
+                                    if ($Payload->params->events[0]->data->button[0] <= 4) {
+                                        $this->SetValue('Shelly_Button', $Payload->params->events[0]->data->button[0]);
+                                    }
+                                    if ($Payload->params->events[0]->data->button[1] <= 4) {
+                                        $this->SetValue('Shelly_Button1', $Payload->params->events[0]->data->button[1]);
+                                    }
+                                    if ($Payload->params->events[0]->data->button[2] <= 4) {
+                                        $this->SetValue('Shelly_Button2', $Payload->params->events[0]->data->button[2]);
+                                    }
+                                    if ($Payload->params->events[0]->data->button[3] <= 4) {
+                                        $this->SetValue('Shelly_Button3', $Payload->params->events[0]->data->button[3]);
+                                    }
                                 }
                                 if (property_exists($Payload->params->events[0]->data, 'rssi')) {
                                     $this->SetValue('Shelly_RSSI', intval($Payload->params->events[0]->data->rssi));
