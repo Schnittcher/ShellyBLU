@@ -45,26 +45,26 @@ class ShellyBLUConfigurator extends IPSModule
                         if (array_key_exists('data', $Payload['params']['events'][0])) {
                             if (array_key_exists('data', $Payload['params']['events'][0])) {
                                 $data = $Payload['params']['events'][0]['data'];
-                                $DeviceType = '';
+                                $deviceType = '';
                                 if (array_key_exists('button', $data)) {
-                                    $devcieType = 'Shelly BLU Button 1';
+                                    $deviceType = 'Shelly BLU Button 1';
                                     if (is_array($data['button'])) {
-                                        $devcieType = 'Shelly BLU RC Button 4';
+                                        $deviceType = 'Shelly BLU RC Button 4';
                                     }
                                 }
                                 if (array_key_exists('window', $data)) {
-                                    $devcieType = 'Shelly BLU Door/Window';
+                                    $deviceType = 'Shelly BLU Door/Window';
                                 }
                                 if (array_key_exists('motion', $data)) {
-                                    $devcieType = 'Shelly BLU Motion';
+                                    $deviceType = 'Shelly BLU Motion';
                                 }
                                 if (array_key_exists('humidity', $data)) {
-                                    $devcieType = 'Shelly BLU H&T';
+                                    $deviceType = 'Shelly BLU H&T';
                                 }
 
                                 if (!array_key_exists($data['address'], $Devices)) {
-                                    if ($devcieType != '') {
-                                        $Devices[$data['address']] = $devcieType;
+                                    if ($deviceType != '') {
+                                        $Devices[$data['address']] = $deviceType;
                                     }
                                 }
                             }
@@ -168,7 +168,7 @@ class ShellyBLUConfigurator extends IPSModule
             }
             $Form['actions'][0]['values'] = $Values;
         }
-        IPS_LogMessage('from', print_r($Form,true));
+        IPS_LogMessage('from', print_r($Form, true));
         return json_encode($Form);
     }
 
