@@ -6,6 +6,7 @@ require_once __DIR__ . '/../libs/ShellyModuleBLU.php';
 class ShellyBLUButton1 extends ShellyModuleBLU
 {
     public static $Variables = [
+        ['Shelly_SRC', 'Source', VARIABLETYPE_STRING, '', [], '', false, true],
         ['Shelly_Button', 'Button', VARIABLETYPE_INTEGER, 'ShellyBLU.Button', [], '', false, true],
         ['Shelly_RSSI', 'RSSI', VARIABLETYPE_INTEGER, '', [], '', false, true],
         ['Shelly_Battery', 'Battery', VARIABLETYPE_INTEGER, '~Battery.100', [], '', false, true]
@@ -49,6 +50,9 @@ class ShellyBLUButton1 extends ShellyModuleBLU
                                 }
                                 if (property_exists($Payload->params->events[0]->data, 'rssi')) {
                                     $this->SetValue('Shelly_RSSI', intval($Payload->params->events[0]->data->rssi));
+                                }
+                                if (property_exists($Payload, 'src')) {
+                                    $this->SetValue('Shelly_SRC', $Payload->src);
                                 }
                             }
                         }
