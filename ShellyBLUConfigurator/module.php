@@ -168,7 +168,6 @@ class ShellyBLUConfigurator extends IPSModule
             }
             $Form['actions'][0]['values'] = $Values;
         }
-        IPS_LogMessage('from', print_r($Form, true));
         return json_encode($Form);
     }
 
