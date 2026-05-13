@@ -11,18 +11,18 @@
             },
             "columns": [
                 {
-                    "caption": "Devicename",
+                    "caption": "BLUAddress",
+                    "name": "BLUAddress",
+                    "width": "150px"
+                },
+                {
+                    "caption": "Name",
                     "name": "name",
                     "width": "auto"
                 },
                 {
-                    "caption": "Instancename",
-                    "name": "InstanceName",
-                    "width": "250px"
-                },
-                {
-                    "caption": "BLU Address",
-                    "name": "BLUAddress",
+                    "caption": "Variables",
+                    "name": "variables",
                     "width": "250px"
                 }
             ],

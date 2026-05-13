@@ -1,0 +1,12 @@
+{
+    "translations": {
+        "de": {
+            "Topic": "Topic",
+            "Single": "Einfach",
+            "Double": "Zweifach",
+            "Tripple": "Dreifach",
+            "Long": "Lang",
+            "Battery": "Batterie"
+        }
+    }
+}

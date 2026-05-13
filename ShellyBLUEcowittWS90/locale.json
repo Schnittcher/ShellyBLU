@@ -1,0 +1,24 @@
+{
+    "translations": {
+        "de": {
+            "Topic": "Topic",
+            "Atmospheric Pressure": "Luftdruck",
+            "Battery": "Batterie",
+            "Capacitor Voltage": "Kondensatorspannung",
+            "Dew Point": "Taupunkt",
+            "Gateway": "Gateway",
+            "Gust Speed": "Böengeschwindigkeit",
+            "Illumination": "Lichtintensität",
+            "Precipitation": "Niederschlag",
+            "Rain Status": "Regenstatus",
+            "Relative Humidity": "Relative Luftfeuchtigkeit",
+            "RSSI": "RSSI",
+            "Temperature": "Temperatur",
+            "UV Index": "UV-Index",
+            "Wind Direction": "Windrichtung",
+            "Wind Speed": "Windgeschwindigkeit",
+            "Rain": "Regen",
+            "No Rain": "Kein Regen"
+        }
+    }
+}

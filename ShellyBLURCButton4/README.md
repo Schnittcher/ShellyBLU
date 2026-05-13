@@ -11,8 +11,7 @@
 
 Feld | Beschreibung
 ------------ | ----------------
-BLU Address | Hier wird die Adresse des BLU Gerätes eingetragen.
-Event | Wird aktuell nicht verwendet.
+Topic | Hier wird das Topic für das Gerät hinterlegt.
 
 ## 2. Funktionen
 

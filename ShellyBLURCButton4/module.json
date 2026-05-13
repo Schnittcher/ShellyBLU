@@ -4,8 +4,7 @@
     "type": 3,
     "vendor": "Shelly",
     "aliases": [
-        "Shelly BLU RC Button 4",
-        "Shelly BLU Wall Switch"
+        "Shelly BLU RC Button 4"
     ],
     "parentRequirements": [
         "{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}"

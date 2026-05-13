@@ -1,0 +1,21 @@
+{
+    "translations": {
+        "de": {
+            "Topic": "Topic",
+            "Single": "Einfach",
+            "Battery": "Batterie",
+            "Gateway": "Gateway",
+            "Button left": "Button links",
+            "Button right": "Button rechts",
+            "Wheel": "Rad",
+            "Wheel Steps": "Rad Schritte",
+            "Channel": "Kanal",
+            "Magic Wand X-Axis": "Zauberstab X-Achse",
+            "Magic Wand Y-Axis": "Zauberstab Y-Achse",
+            "Magic Wand Z-Axis": "Zauberstab Z-Achse",
+            "RSSI": "RSSI",
+            "Up": "Hoch",
+            "Down": "Runter"
+        }
+    }
+}

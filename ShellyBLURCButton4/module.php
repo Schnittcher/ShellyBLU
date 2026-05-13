@@ -1,74 +1,130 @@
 <?php
 
 declare(strict_types=1);
-require_once __DIR__ . '/../libs/ShellyModuleBLU.php';
+require_once __DIR__ . '/../libs/vendor/SymconModulHelper/DebugHelper.php';
+require_once __DIR__ . '/../libs/MQTTHelper.php';
 
-class ShellyBLURCButton4 extends ShellyModuleBLU
+class ShellyBLURCButton4 extends IPSModule
 {
-    public static $Variables = [
-        ['Shelly_Button', 'Button 1', VARIABLETYPE_INTEGER, 'ShellyBLU.Button', [], '', false, true],
-        ['Shelly_Button1', 'Button 2', VARIABLETYPE_INTEGER, 'ShellyBLU.Button', [], '', false, true],
-        ['Shelly_Button2', 'Button 3', VARIABLETYPE_INTEGER, 'ShellyBLU.Button', [], '', false, true],
-        ['Shelly_Button3', 'Button 4', VARIABLETYPE_INTEGER, 'ShellyBLU.Button', [], '', false, true],
-        ['Shelly_RSSI', 'RSSI', VARIABLETYPE_INTEGER, '', [], '', false, true],
-        ['Shelly_Battery', 'Battery', VARIABLETYPE_INTEGER, '~Battery.100', [], '', false, true]
-    ];
+    use DebugHelper;
+    use MQTTHelper;
 
     public function Create()
     {
         parent::Create();
-        if (!IPS_VariableProfileExists('ShellyBLU.Button')) {
-            $this->RegisterProfileIntegerEx('ShellyBLU.Button', '', '', '', [
-                [1, $this->Translate('Single'), '', -1],
-                [2, $this->Translate('Double'), '', -1],
-                [3, $this->Translate('Tripple'), '', -1],
-                [4, $this->Translate('Long'), '', -1]
-            ]);
-        }
+        $this->ConnectParent('{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}');
+        $this->RegisterPropertyString('Topic', '');
+
+        $this->RegisterVariableInteger('Button1', $this->Translate('Button 1'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'sun',
+            'SUFFIX'         => '',
+            'INTERVALS_ACTIVE' => true,
+            'INTERVALS'        => json_encode([
+                ['IntervalMinValue' => 1,  'IntervalMaxValue' => 1, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Single'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 2,  'IntervalMaxValue' => 2, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Double'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 3,  'IntervalMaxValue' => 3, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Tripple'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 4,  'IntervalMaxValue' => 4, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Long'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 254,  'IntervalMaxValue' =>  254, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Hold'), 'IconValue' => '', 'Color' => 0],
+            ])
+        ], 0);
+
+        $this->RegisterVariableInteger('Button2', $this->Translate('Button 2'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'sun',
+            'SUFFIX'         => '',
+            'INTERVALS_ACTIVE' => true,
+            'INTERVALS'        => json_encode([
+                ['IntervalMinValue' => 1,  'IntervalMaxValue' => 1, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Single'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 2,  'IntervalMaxValue' => 2, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Double'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 3,  'IntervalMaxValue' => 3, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Tripple'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 4,  'IntervalMaxValue' => 4, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Long'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 254,  'IntervalMaxValue' =>  254, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Hold'), 'IconValue' => '', 'Color' => 0],
+            ])
+        ], 1);
+
+        $this->RegisterVariableInteger('Button3', $this->Translate('Button 3'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'sun',
+            'SUFFIX'         => '',
+            'INTERVALS_ACTIVE' => true,
+            'INTERVALS'        => json_encode([
+                ['IntervalMinValue' => 1,  'IntervalMaxValue' => 1, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Single'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 2,  'IntervalMaxValue' => 2, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Double'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 3,  'IntervalMaxValue' => 3, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Tripple'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 4,  'IntervalMaxValue' => 4, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Long'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 254,  'IntervalMaxValue' =>  254, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Hold'), 'IconValue' => '', 'Color' => 0],
+            ])
+        ], 2);
+
+        $this->RegisterVariableInteger('Button4', $this->Translate('Button 4'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'sun',
+            'SUFFIX'         => '',
+            'INTERVALS_ACTIVE' => true,
+            'INTERVALS'        => json_encode([
+                ['IntervalMinValue' => 1,  'IntervalMaxValue' => 1, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Single'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 2,  'IntervalMaxValue' => 2, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Double'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 3,  'IntervalMaxValue' => 3, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Tripple'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 4,  'IntervalMaxValue' => 4, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Long'), 'IconValue' => '', 'Color' => 0],
+                ['IntervalMinValue' => 254,  'IntervalMaxValue' =>  254, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Hold'), 'IconValue' => '', 'Color' => 0],
+            ])
+        ], 3);
+
+        $this->RegisterVariableInteger('Battery', $this->Translate('Battery'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'battery',
+            'SUFFIX'         => ' %',
+        ], 4);
+
+        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), '', 5);
+        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), '', 6);
+
     }
+    public function ApplyChanges()
+    {
+        parent::ApplyChanges();
+        $this->ConnectParent('{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}');
+
+        //Setze Filter für ReceiveData
+        $Topic = $this->ReadPropertyString('Topic');
+        $this->SetReceiveDataFilter('.*' . $Topic . '.*');
+
+    }
+
 
     public function ReceiveData($JSONString)
     {
-        if (!empty($this->ReadPropertyString('BLUAddress'))) {
-            $Buffer = json_decode($JSONString);
+
+        if (!empty($this->ReadPropertyString('Topic'))) {
+            $Buffer = json_decode($JSONString, true);
             $this->SendDebug('JSON', $Buffer, 0);
 
-            //Für MQTT Fix in IPS Version 6.3
-            if (IPS_GetKernelDate() > 1670886000) {
-                $Buffer->Payload = utf8_decode($Buffer->Payload);
+            $Payload = json_decode($Buffer['Payload'], true);
+
+            if (array_key_exists('rssi', $Payload)) {
+                $this->SetValue('RSSI', intval($Payload['rssi']));
+            }
+            if (array_key_exists('gateway', $Payload)) {
+                $this->SetValue('Gateway', $Payload ['gateway']);
             }
 
-            if (property_exists($Buffer, 'Topic')) {
-                if (fnmatch('*/events/rpc', $Buffer->Topic)) {
-                    $Payload = json_decode($Buffer->Payload);
-                    if (property_exists($Payload, 'params')) {
-                        if (property_exists($Payload->params, 'events')) {
-                            if (property_exists($Payload->params->events[0], 'data')) {
-                                if (property_exists($Payload->params->events[0]->data, 'battery')) {
-                                    $this->SetValue('Shelly_Battery', $Payload->params->events[0]->data->battery);
-                                }
-                                if (property_exists($Payload->params->events[0]->data, 'button')) {
-                                    if ($Payload->params->events[0]->data->button[0] <= 4) {
-                                        $this->SetValue('Shelly_Button', $Payload->params->events[0]->data->button[0]);
-                                    }
-                                    if ($Payload->params->events[0]->data->button[1] <= 4) {
-                                        $this->SetValue('Shelly_Button1', $Payload->params->events[0]->data->button[1]);
-                                    }
-                                    if ($Payload->params->events[0]->data->button[2] <= 4) {
-                                        $this->SetValue('Shelly_Button2', $Payload->params->events[0]->data->button[2]);
-                                    }
-                                    if ($Payload->params->events[0]->data->button[3] <= 4) {
-                                        $this->SetValue('Shelly_Button3', $Payload->params->events[0]->data->button[3]);
-                                    }
-                                }
-                                if (property_exists($Payload->params->events[0]->data, 'rssi')) {
-                                    $this->SetValue('Shelly_RSSI', intval($Payload->params->events[0]->data->rssi));
-                                }
-                            }
-                        }
-                    }
-                    if (property_exists($Buffer->Payload, 'active')) {
-                    }
+            if (array_key_exists('service_data', $Payload)) {
+                $data = $Payload['service_data'];
+                if (array_key_exists('motion', $data)) {
+                    $this->SetValue('Motion', boolval($data['motion']));
+                }
+                if (array_key_exists('illumination', $data)) {
+                    $this->SetValue('Illumination', $data['illumination']);
+                }
+                if (array_key_exists('battery', $data)) {
+                    $this->SetValue('Battery', $data['battery']);
+                }
+                if (array_key_exists('button', $data)) {
+                    $this->SetValue('Button1', $data['button'][0]);
+                    $this->SetValue('Button2', $data['button'][1]);
+                    $this->SetValue('Button3', $data['button'][2]);
+                    $this->SetValue('Button4', $data['button'][3]);
                 }
             }
         }

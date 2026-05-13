@@ -1,8 +1,8 @@
-# ShellyBLUButton1
-   Dieses Modul ermöglicht es, ein Shelly BLU Button 1 in IP-Symcon zu integrieren.
+# ShellyBLUHT
+   Dieses Modul ermöglicht es, ein Shelly BLU H&T in IP-Symcon zu integrieren.
      
    ## Inhaltverzeichnis
-- [ShellyBLUButton1](#shellyblubutton1)
+- [ShellyBLUHT](#shellybluht)
   - [Inhaltverzeichnis](#inhaltverzeichnis)
   - [1. Konfiguration](#1-konfiguration)
   - [2. Funktionen](#2-funktionen)
@@ -11,8 +11,7 @@
 
 Feld | Beschreibung
 ------------ | ----------------
-BLU Address | Hier wird die Adresse des BLU Gerätes eingetragen.
-Event | Wird aktuell nicht verwendet.
+Topic | Hier wird das Topic für das Gerät hinterlegt.
 
 ## 2. Funktionen
 

@@ -1,8 +1,8 @@
-# ShellyBLUDoorWindow
-   Dieses Modul ermöglicht es, ein Shelly BLU Window/Door Sensor in IP-Symcon zu integrieren.
+# ShellyBLUMotion
+   Dieses Modul ermöglicht es, ein Shelly BLU Motion Sensor in IP-Symcon zu integrieren.
      
    ## Inhaltverzeichnis
-- [ShellyBLUDoorWindow](#shellybludoorwindow)
+- [ShellyBLUMotion](#shellyblumotion)
   - [Inhaltverzeichnis](#inhaltverzeichnis)
   - [1. Konfiguration](#1-konfiguration)
   - [2. Funktionen](#2-funktionen)
@@ -11,8 +11,7 @@
 
 Feld | Beschreibung
 ------------ | ----------------
-BLU Address | Hier wird die Adresse des BLU Gerätes eingetragen.
-Event | Wird aktuell nicht verwendet.
+Topic | Hier wird das Topic für das Gerät hinterlegt.
 
 ## 2. Funktionen
 

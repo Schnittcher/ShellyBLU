@@ -11,8 +11,8 @@
 
 Field        | Description
 ------------ | -------------
-BLU Address | The BLU address of the device.
-Event | Currently not used.
+Topic | The Topic of the device.
+
 
 ## 2. Functions
 

@@ -1,0 +1,18 @@
+{
+    "translations": {
+        "de": {
+            "Topic": "Topic",
+            "Single": "Einfach",
+            "Battery": "Batterie",
+            "Button": "Button",
+            "Relative Humidity": "Relative Luftfeuchtigkeit",
+            "Temperature": "Temperatur",
+            "Gateway": "Gateway",
+            "RSSI": "RSSI",
+            "Light": "Licht",
+            "Dark": "Dunkel",
+            "Twilight": "Dämmerung",
+            "Bright": "Hell"
+        }
+    }
+}

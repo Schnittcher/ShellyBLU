@@ -1,0 +1,17 @@
+{
+    "id": "{4AABB6F7-1732-86B4-410D-8B42F063D71D}",
+    "name": "ShellyBLUButtonTough1ZB",
+    "type": 3,
+    "vendor": "Shelly",
+    "aliases": [
+        "Shelly BLU Button Tough 1 ZB"
+    ],
+    "parentRequirements": [
+        "{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}"
+    ],
+    "childRequirements": [],
+    "implemented": [
+        "{7F7632D9-FA40-4F38-8DEA-C83CD4325A32}"
+    ],
+    "prefix": "SHELLY"
+}
