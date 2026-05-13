@@ -1,8 +1,8 @@
-# ShellyBLUButton1
+# ShellyBLUButton1Tough1ZB
    This module enables the integration of a Shelly BLU Button Tough 1 ZB in IP-Symcon.
      
    ## Table of Contents
-- [ShellyBLUButton1](#shellyblubutton1)
+- [ShellyBLUButton1Tough1ZB](#shellyblubutton1tough1zb)
   - [Table of Contents](#table-of-contents)
   - [1. Configuration](#1-configuration)
   - [2. Functions](#2-functions)
