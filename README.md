@@ -25,7 +25,7 @@
 
 ## 1.1 Shelly BLU Script
 
-Das Script ist hier zu finden: * [symcon-blu.js](libs/symcon-blu.js)
+Das Script ist hier zu finden: [symcon-blu.js](libs/symcon-blu.js)
 
 ## 2. Enthaltene Module
 
