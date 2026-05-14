@@ -21,9 +21,9 @@
                     "width": "auto"
                 },
                 {
-                    "caption": "Variables",
-                    "name": "variables",
-                    "width": "250px"
+                    "caption": "Model",
+                    "name": "model",
+                    "width": "350px"
                 }
             ],
             "values": []

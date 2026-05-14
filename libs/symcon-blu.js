@@ -154,7 +154,7 @@ const BTHOME_SVC_ID_STR = "fcd2";
 
 const SCAN_OPTION = {
   duration_ms: BLE.Scanner.INFINITE_SCAN,
-  active: false,
+  active: true,
 };
 
 function pushToMQ(addr, message) {
@@ -172,7 +172,8 @@ function scanCB(ev, res) {
   try {
     const decodeData = BTHomeDecoder.unpack(res.service_data[BTHOME_SVC_ID_STR]);
     const deviceInfo = Shelly.getDeviceInfo();
-    
+    const scanRsp = parseScanRsp(res.scanRsp);
+
 if (typeof decodeData.dimmer !== "undefined") {
     console.log("BEFORE:", decodeData.dimmer, "HEX:", decodeData.dimmer.toString(16));
     decodeData.dimmersteps = (decodeData.dimmer >> 8) & 0xFF;
@@ -185,7 +186,8 @@ if (typeof decodeData.dimmer !== "undefined") {
       gateway_name: deviceInfo.name, // z.B. "Wohnzimmer Gateway"
       addr: addr,
       rssi: res.rssi,
-      local_name: res.local_name || "",
+      model: res.local_name || (scanRsp ? scanRsp.local_name : "") || "",
+      model_id: scanRsp ? scanRsp.model_id : null,
       service_data: decodeData,
     };
 
@@ -193,6 +195,50 @@ if (typeof decodeData.dimmer !== "undefined") {
   } catch (err) {
     console.log(err);
   }
+}
+
+function parseScanRsp(buf) {
+    if (typeof buf === "undefined" || buf.length === 0) return null;
+    let result = {};
+    let pos = 0;
+
+    while (pos < buf.length) {
+        let len = buf.at(pos);
+        let type = buf.at(pos + 1);
+        pos += 2;
+
+        if (type === 0x08 || type === 0x09) {
+            // Local Name
+            let name = "";
+            for (let i = 0; i < len - 1; i++) {
+                name += String.fromCharCode(buf.at(pos + i));
+            }
+            result.local_name = name;
+        } else if (type === 0xFF) {
+            // Manufacturer Data
+            let mfid = buf.at(pos) | (buf.at(pos + 1) << 8);
+            if (mfid === 0x0BA9) {
+                let mpos = pos + 2;
+                while (mpos < pos + len - 1) {
+                    let blockType = buf.at(mpos);
+                    mpos++;
+                    if (blockType === 0x01) {
+                        result.flags = buf.at(mpos) | (buf.at(mpos + 1) << 8);
+                        mpos += 2;
+                    } else if (blockType === 0x0B) {
+                        result.model_id = buf.at(mpos) | (buf.at(mpos + 1) << 8);
+                        mpos += 2;
+                    } else if (blockType === 0x0A) {
+                        mpos += 6; // MAC überspringen
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+        pos += len - 1;
+    }
+    return result;
 }
 
 function init() {
@@ -213,6 +259,40 @@ function init() {
   }
 
   BLE.Scanner.Subscribe(scanCB);
+}
+
+function parseManufacturerData(mfdata) {
+    if (typeof mfdata === "undefined") return null;
+    
+    // Prüfen ob es Allterco MFID 0x0BA9 ist
+    // Format: Length | Type(0xFF) | MFID(0xA9, 0x0B) | payload
+    let result = {};
+    let pos = 0;
+    
+    // MFID überspringen (2 Bytes)
+    pos = 2;
+    
+    while (pos < mfdata.length) {
+        let blockType = mfdata.at(pos);
+        pos++;
+        
+        if (blockType === 0x01) {
+            // Flags (2 Bytes)
+            result.flags = mfdata.at(pos) | (mfdata.at(pos + 1) << 8);
+            pos += 2;
+        } else if (blockType === 0x0A) {
+            // MAC (6 Bytes) - überspringen
+            pos += 6;
+        } else if (blockType === 0x0B) {
+            // Device model ID (2 Bytes)
+            result.model_id = mfdata.at(pos) | (mfdata.at(pos + 1) << 8);
+            pos += 2;
+        } else {
+            break; // Unbekannter Block
+        }
+    }
+    
+    return result;
 }
 
 init();
