@@ -18,7 +18,8 @@
             "Wind Direction": "Windrichtung",
             "Wind Speed": "Windgeschwindigkeit",
             "Rain": "Regen",
-            "No Rain": "Kein Regen"
+            "No Rain": "Kein Regen",
+            "Wind Chill": "Gefühlte Temperatur"
         }
     }
 }

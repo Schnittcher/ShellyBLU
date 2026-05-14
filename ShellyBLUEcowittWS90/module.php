@@ -24,6 +24,15 @@ class ShellyBLUEcowittWS90 extends IPSModule
             'STEP_SIZE'      => 0.01,
         ], 0);
 
+        $this->RegisterVariableFloat('WindChill', $this->Translate('Wind Chill'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'temperature-full',
+            'SUFFIX'         => ' °C',
+            'DIGITS'         => 1,
+            'PERCENTAGE'     => false,
+            'STEP_SIZE'      => 0.01,
+        ], 1);
+
         $this->RegisterVariableFloat('RelativeHumidity', $this->Translate('Relative Humidity'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
             'ICON'           => 'droplet-percent',
@@ -31,7 +40,7 @@ class ShellyBLUEcowittWS90 extends IPSModule
             'DIGITS'         => 1,
             'PERCENTAGE'     => false,
             'STEP_SIZE'      => 0.01,
-        ], 1);
+        ], 2);
 
         $this->RegisterVariableFloat('Illumination', $this->Translate('Illumination'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
@@ -40,7 +49,7 @@ class ShellyBLUEcowittWS90 extends IPSModule
             'DIGITS'         => 1,
             'PERCENTAGE'     => false,
             'STEP_SIZE'      => 0.01,
-        ], 2);
+        ], 3);
 
         $this->RegisterVariableBoolean('RainStatus', $this->Translate('Rain Status'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
@@ -63,7 +72,7 @@ class ShellyBLUEcowittWS90 extends IPSModule
                         'ColorValue' => 3329330
                     ]
             ])
-        ], 3);
+        ], 4);
 
         $this->RegisterVariableFloat('Precipitation', $this->Translate('Precipitation'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
@@ -72,7 +81,7 @@ class ShellyBLUEcowittWS90 extends IPSModule
             'DIGITS'         => 1,
             'PERCENTAGE'     => false,
             'STEP_SIZE'      => 0.01,
-        ], 4);
+        ], 5);
         $this->RegisterVariableFloat('WindSpeed', $this->Translate('Wind Speed'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
             'ICON'           => 'wind',
@@ -80,7 +89,7 @@ class ShellyBLUEcowittWS90 extends IPSModule
             'DIGITS'         => 1,
             'PERCENTAGE'     => false,
             'STEP_SIZE'      => 0.01,
-        ], 5);
+        ], 6);
 
         $this->RegisterVariableFloat('GustSpeed', $this->Translate('Gust Speed'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
@@ -96,14 +105,21 @@ class ShellyBLUEcowittWS90 extends IPSModule
          'ICON'           => 'WindDirection',
          'SUFFIX'         => ' °',
          'PERCENTAGE'     => false,
-        ], 6);
+        ], 8);
+
+        $this->RegisterVariableString('WindDirectionString', $this->Translate('Wind Direction'), [
+         'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+         'ICON'           => 'WindDirection',
+         'SUFFIX'         => '',
+         'PERCENTAGE'     => false,
+        ], 9);
 
         $this->RegisterVariableInteger('UVIndex', $this->Translate('UV Index'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
             'ICON'           => 'sun',
             'SUFFIX'         => '',
             'PERCENTAGE'     => false,
-        ], 8);
+        ], 10);
 
         $this->RegisterVariableFloat('AtmPressure', $this->Translate('Atmospheric Pressure'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
@@ -111,7 +127,7 @@ class ShellyBLUEcowittWS90 extends IPSModule
             'SUFFIX'         => ' hPa',
             'DIGITS'         => 1,
             'PERCENTAGE'     => false,
-        ], 9);
+        ], 11);
 
         $this->RegisterVariableFloat('DewPoint', $this->Translate('Dew Point'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
@@ -120,7 +136,7 @@ class ShellyBLUEcowittWS90 extends IPSModule
             'DIGITS'         => 1,
             'PERCENTAGE'     => false,
             'STEP_SIZE'      => 0.01,
-        ], 10);
+        ], 12);
 
         $this->RegisterVariableFloat('CapacitorVoltage', $this->Translate('Capacitor Voltage'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
@@ -129,24 +145,24 @@ class ShellyBLUEcowittWS90 extends IPSModule
             'DIGITS'         => 1,
             'PERCENTAGE'     => false,
             'STEP_SIZE'      => 0.01,
-        ], 11);
+        ], 13);
 
         $this->RegisterVariableInteger('Battery', $this->Translate('Battery'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
             'ICON'           => 'battery-full',
             'SUFFIX'         => ' %',
-        ], 12);
+        ], 14);
 
         $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
             'ICON'           => 'server',
             'SUFFIX'         => '',
 
-        ], 13);
+        ], 15);
         $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
             'ICON'           => 'signal'
-        ], 14);
+        ], 16);
     }
 
     public function ApplyChanges()
@@ -193,6 +209,8 @@ class ShellyBLUEcowittWS90 extends IPSModule
                 }
                 if (array_key_exists('wind_direction', $data)) {
                     $this->SetValue('WindDirection', $data['wind_direction']);
+                    $this->SetValue('WindDirectionString', $this->mappingWindDirection($data['wind_direction']));
+
                 }
                 if (array_key_exists('atm_pressure', $data)) {
                     $this->SetValue('AtmPressure', $data['atm_pressure']);
@@ -208,6 +226,13 @@ class ShellyBLUEcowittWS90 extends IPSModule
                 }
                 if (array_key_exists('temperature', $data)) {
                     $this->SetValue('Temperature', $data['temperature']);
+                    $windChill = $this->calculateWindChill(
+                        floatval($data['temperature']),
+                        floatval($data['humidity'] ?? 0),
+                        floatval($data['wind_speed'][0] ?? 0)
+                    );
+                    $this->SetValue('WindChill', $windChill);
+
                 }
                 if (array_key_exists('precipitation', $data)) {
                     $this->SetValue('Precipitation', $data['precipitation']);
@@ -217,5 +242,50 @@ class ShellyBLUEcowittWS90 extends IPSModule
                 }
             }
         }
+    }
+
+    //Geüfhlte Temperatur berechnen
+    public static function calculateWindChill(float $temp, float $humidity, float $windSpeed): float
+    {
+        if ($temp <= 10 && $windSpeed > 4.8) {
+            // Wind Chill
+            return round(
+                13.12
+                + 0.6215 * $temp
+                - 11.37 * pow($windSpeed, 0.16)
+                + 0.3965 * $temp * pow($windSpeed, 0.16),
+                1
+            );
+        } elseif ($temp >= 27) {
+            // Heat Index
+            return round(
+                -8.78469475556
+                + 1.61139411 * $temp
+                + 2.3385248 * $humidity
+                - 0.14611605 * $temp * $humidity
+                - 0.012308094 * pow($temp, 2)
+                - 0.016424828 * pow($humidity, 2)
+                + 0.002211732 * pow($temp, 2) * $humidity
+                + 0.00072546 * $temp * pow($humidity, 2)
+                - 0.000003582 * pow($temp, 2) * pow($humidity, 2),
+                1
+            );
+        }
+
+        return round($temp, 1);
+    }
+
+    // Windrichtung in Text umwandeln
+    public function mappingWindDirection(int $degree): string
+    {
+        $directions = array(
+        "N","NNO","NO","ONO",
+        "O","OSO","SO","SSO",
+        "S","SSW","SW","WSW",
+        "W","WNW","NW","NNW"
+        );
+        $index = round($degree / 22.5) % 16;
+        return $directions[$index];
+
     }
 }
