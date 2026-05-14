@@ -17,13 +17,13 @@ class ShellyBLURemoteControlZB extends IPSModule
 
         $this->RegisterVariableInteger('Channel', $this->Translate('Channel'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => '',
+            'ICON'           => 'list-ol',
             'SUFFIX'         => '',
         ], 0);
 
         $this->RegisterVariableInteger('ButtonLeft', $this->Translate('Button left'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => '',
+            'ICON'           => 'arrow-left',
             'SUFFIX'         => '',
             'INTERVALS_ACTIVE' => true,
             'INTERVALS'        => json_encode([
@@ -33,7 +33,7 @@ class ShellyBLURemoteControlZB extends IPSModule
 
         $this->RegisterVariableInteger('ButtonRight', $this->Translate('Button right'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => '',
+            'ICON'           => 'arrow-right',
             'SUFFIX'         => '',
             'INTERVALS_ACTIVE' => true,
             'INTERVALS'        => json_encode([
@@ -43,7 +43,7 @@ class ShellyBLURemoteControlZB extends IPSModule
 
         $this->RegisterVariableInteger('Wheel', $this->Translate('Wheel'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => '',
+            'ICON'           => 'arrows-up-down',
             'SUFFIX'         => '',
             'INTERVALS_ACTIVE' => true,
             'INTERVALS'        => json_encode([
@@ -54,7 +54,7 @@ class ShellyBLURemoteControlZB extends IPSModule
 
         $this->RegisterVariableInteger('WheelSteps', $this->Translate('Wheel Steps'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => '',
+            'ICON'           => 'ellipsis-vertical',
             'SUFFIX'         => ''
         ], 4);
 
@@ -87,11 +87,19 @@ class ShellyBLURemoteControlZB extends IPSModule
 
         $this->RegisterVariableInteger('Battery', $this->Translate('Battery'), [
            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-           'ICON'           => 'battery',
+           'ICON'           => 'battery-full',
            'SUFFIX'         => ' %',
         ], 8);
-        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), '', 9);
-        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), '', 10);
+        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'server',
+            'SUFFIX'         => '',
+
+        ], 9);
+        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'signal'
+        ], 10);
 
     }
     public function ApplyChanges()

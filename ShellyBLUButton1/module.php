@@ -17,7 +17,7 @@ class ShellyBLUButton1 extends IPSModule
 
         $this->RegisterVariableInteger('Button', $this->Translate('Button'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'sun',
+            'ICON'           => 'circle-dot',
             'SUFFIX'         => '',
             'INTERVALS_ACTIVE' => true,
             'INTERVALS'        => json_encode([
@@ -30,12 +30,20 @@ class ShellyBLUButton1 extends IPSModule
 
         $this->RegisterVariableInteger('Battery', $this->Translate('Battery'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'battery',
+            'ICON'           => 'battery-full',
             'SUFFIX'         => ' %',
         ], 1);
 
-        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), '', 2);
-        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), '', 3);
+        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'server',
+            'SUFFIX'         => '',
+
+        ], 2);
+        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'signal'
+        ], 3);
     }
     public function ApplyChanges()
     {

@@ -30,12 +30,20 @@ class ShellyBLUButtonTough1ZB extends IPSModule
 
         $this->RegisterVariableInteger('Battery', $this->Translate('Battery'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'battery',
+            'ICON'           => 'battery-full',
             'SUFFIX'         => ' %',
         ], 1);
 
-        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), '', 2);
-        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), '', 3);
+        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'server',
+            'SUFFIX'         => '',
+
+        ], 2);
+        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'signal'
+        ], 14);
     }
     public function ApplyChanges()
     {

@@ -49,7 +49,7 @@ class ShellyBLUMotion extends IPSModule
 
         $this->RegisterVariableInteger('Button', $this->Translate('Button'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'sun',
+            'ICON'           => 'circle-dot',
             'SUFFIX'         => '',
             'INTERVALS_ACTIVE' => true,
             'INTERVALS'        => json_encode([
@@ -60,12 +60,20 @@ class ShellyBLUMotion extends IPSModule
 
         $this->RegisterVariableInteger('Battery', $this->Translate('Battery'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'battery',
+            'ICON'           => 'battery-full',
             'SUFFIX'         => ' %',
         ], 3);
 
-        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), '', 4);
-        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), '', 5);
+        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'server',
+            'SUFFIX'         => '',
+
+        ], 4);
+        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'signal'
+        ], 5);
 
 
     }

@@ -17,7 +17,7 @@ class ShellyBLUEcowittWS90 extends IPSModule
 
         $this->RegisterVariableFloat('Temperature', $this->Translate('Temperature'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'temperature',
+            'ICON'           => 'temperature-full',
             'SUFFIX'         => ' °C',
             'DIGITS'         => 1,
             'PERCENTAGE'     => false,
@@ -26,7 +26,7 @@ class ShellyBLUEcowittWS90 extends IPSModule
 
         $this->RegisterVariableFloat('RelativeHumidity', $this->Translate('Relative Humidity'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'humidity',
+            'ICON'           => 'droplet-percent',
             'SUFFIX'         => ' %',
             'DIGITS'         => 1,
             'PERCENTAGE'     => false,
@@ -107,7 +107,7 @@ class ShellyBLUEcowittWS90 extends IPSModule
 
         $this->RegisterVariableFloat('AtmPressure', $this->Translate('Atmospheric Pressure'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => '',
+            'ICON'           => 'gauge',
             'SUFFIX'         => ' hPa',
             'DIGITS'         => 1,
             'PERCENTAGE'     => false,
@@ -133,12 +133,20 @@ class ShellyBLUEcowittWS90 extends IPSModule
 
         $this->RegisterVariableInteger('Battery', $this->Translate('Battery'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'battery',
+            'ICON'           => 'battery-full',
             'SUFFIX'         => ' %',
         ], 12);
 
-        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), '', 13);
-        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), '', 14);
+        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'server',
+            'SUFFIX'         => '',
+
+        ], 13);
+        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'signal'
+        ], 14);
     }
 
     public function ApplyChanges()

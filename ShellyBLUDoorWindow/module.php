@@ -58,12 +58,20 @@ class ShellyBLUDoorWindow extends IPSModule
 
         $this->RegisterVariableInteger('Battery', $this->Translate('Battery'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'battery',
+            'ICON'           => 'battery-full',
             'SUFFIX'         => ' %',
         ], 3);
 
-        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), '', 4);
-        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), '', 5);
+        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'server',
+            'SUFFIX'         => '',
+
+        ], 2);
+        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'signal'
+        ], 3);
     }
 
     public function ApplyChanges()

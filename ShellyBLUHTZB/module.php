@@ -19,7 +19,7 @@ class ShellyBLUHTZB extends IPSModule
 
         $this->RegisterVariableFloat('Temperature', $this->Translate('Temperature'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'temperature',
+            'ICON'           => 'temperature-full',
             'SUFFIX'         => ' °C',
             'DIGITS'         => 1,
             'PERCENTAGE'     => false,
@@ -28,7 +28,7 @@ class ShellyBLUHTZB extends IPSModule
 
         $this->RegisterVariableFloat('RelativeHumidity', $this->Translate('Relative Humidity'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'humidity',
+            'ICON'           => 'droplet-percent',
             'SUFFIX'         => ' %',
             'DIGITS'         => 1,
             'PERCENTAGE'     => false,
@@ -37,7 +37,7 @@ class ShellyBLUHTZB extends IPSModule
 
         $this->RegisterVariableInteger('Button', $this->Translate('Button'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'sun',
+            'ICON'           => 'circle-dot',
             'SUFFIX'         => '',
             'INTERVALS_ACTIVE' => true,
             'INTERVALS'        => json_encode([
@@ -48,12 +48,20 @@ class ShellyBLUHTZB extends IPSModule
 
         $this->RegisterVariableInteger('Battery', $this->Translate('Battery'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'battery',
+            'ICON'           => 'battery-full',
             'SUFFIX'         => ' %',
         ], 3);
 
-        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), '', 4);
-        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), '', 5);
+        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'server',
+            'SUFFIX'         => '',
+
+        ], 4);
+        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'signal'
+        ], 5);
     }
 
     public function ApplyChanges()

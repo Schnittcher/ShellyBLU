@@ -11,22 +11,13 @@ class ShellyWallSwitch4 extends IPSModule
 
     public function Create()
     {
-        parent::Create(); 
+        parent::Create();
         $this->ConnectParent('{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}');
         $this->RegisterPropertyString('Topic', '');
 
-        $this->RegisterVariableString('Gateway', 'Gateway', '', 0);
-        $this->RegisterVariableInteger('RSSI', 'RSSI', '', 0);
-
-        $this->RegisterVariableInteger('Battery', $this->Translate('Battery'), [
-            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'battery',
-            'SUFFIX'         => ' %',
-        ], 0);
-        
         $this->RegisterVariableInteger('Button1', $this->Translate('Button 1'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'sun',
+            'ICON'           => 'circle-dot',
             'SUFFIX'         => '',
             'INTERVALS_ACTIVE' => true,
             'INTERVALS'        => json_encode([
@@ -40,7 +31,7 @@ class ShellyWallSwitch4 extends IPSModule
 
         $this->RegisterVariableInteger('Button2', $this->Translate('Button 2'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'sun',
+            'ICON'           => 'circle-dot',
             'SUFFIX'         => '',
             'INTERVALS_ACTIVE' => true,
             'INTERVALS'        => json_encode([
@@ -50,11 +41,11 @@ class ShellyWallSwitch4 extends IPSModule
                 ['IntervalMinValue' => 4,  'IntervalMaxValue' => 4, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Long'), 'IconValue' => '', 'Color' => 0],
                 ['IntervalMinValue' => 254,  'IntervalMaxValue' =>  254, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Hold'), 'IconValue' => '', 'Color' => 0],
             ])
-        ], 0);
+        ], 1);
 
         $this->RegisterVariableInteger('Button3', $this->Translate('Button 3'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'sun',
+            'ICON'           => 'circle-dot',
             'SUFFIX'         => '',
             'INTERVALS_ACTIVE' => true,
             'INTERVALS'        => json_encode([
@@ -64,10 +55,10 @@ class ShellyWallSwitch4 extends IPSModule
                 ['IntervalMinValue' => 4,  'IntervalMaxValue' => 4, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Long'), 'IconValue' => '', 'Color' => 0],
                 ['IntervalMinValue' => 254,  'IntervalMaxValue' =>  254, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Hold'), 'IconValue' => '', 'Color' => 0],
             ])
-        ], 0);
+        ], 2);
         $this->RegisterVariableInteger('Button4', $this->Translate('Button 4'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'sun',
+            'ICON'           => 'circle-dot',
             'SUFFIX'         => '',
             'INTERVALS_ACTIVE' => true,
             'INTERVALS'        => json_encode([
@@ -77,9 +68,28 @@ class ShellyWallSwitch4 extends IPSModule
                 ['IntervalMinValue' => 4,  'IntervalMaxValue' => 4, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Long'), 'IconValue' => '', 'Color' => 0],
                 ['IntervalMinValue' => 254,  'IntervalMaxValue' =>  254, 'ConstantActive' => true,  'ConstantValue' => $this->Translate('Hold'), 'IconValue' => '', 'Color' => 0],
             ])
-        ], 0);                
-}
-        public function ApplyChanges()
+        ], 3);
+
+        $this->RegisterVariableInteger('Battery', $this->Translate('Battery'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'battery-full',
+            'SUFFIX'         => ' %',
+        ], 4);
+
+        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'server',
+            'SUFFIX'         => '',
+
+        ], 5);
+        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'signal'
+        ], 6);
+
+
+    }
+    public function ApplyChanges()
     {
         parent::ApplyChanges();
         $this->ConnectParent('{C6D2AEB3-6E1F-4B2E-8E69-3A1A00246850}');
@@ -90,7 +100,7 @@ class ShellyWallSwitch4 extends IPSModule
 
     }
 
-        public function ReceiveData($JSONString)
+    public function ReceiveData($JSONString)
     {
 
         if (!empty($this->ReadPropertyString('Topic'))) {

@@ -17,7 +17,7 @@ class ShellyBLURCButton4 extends IPSModule
 
         $this->RegisterVariableInteger('Button1', $this->Translate('Button 1'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'sun',
+            'ICON'           => 'circle-dot',
             'SUFFIX'         => '',
             'INTERVALS_ACTIVE' => true,
             'INTERVALS'        => json_encode([
@@ -31,7 +31,7 @@ class ShellyBLURCButton4 extends IPSModule
 
         $this->RegisterVariableInteger('Button2', $this->Translate('Button 2'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'sun',
+            'ICON'           => 'circle-dot',
             'SUFFIX'         => '',
             'INTERVALS_ACTIVE' => true,
             'INTERVALS'        => json_encode([
@@ -45,7 +45,7 @@ class ShellyBLURCButton4 extends IPSModule
 
         $this->RegisterVariableInteger('Button3', $this->Translate('Button 3'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'sun',
+            'ICON'           => 'circle-dot',
             'SUFFIX'         => '',
             'INTERVALS_ACTIVE' => true,
             'INTERVALS'        => json_encode([
@@ -59,7 +59,7 @@ class ShellyBLURCButton4 extends IPSModule
 
         $this->RegisterVariableInteger('Button4', $this->Translate('Button 4'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'sun',
+            'ICON'           => 'circle-dot',
             'SUFFIX'         => '',
             'INTERVALS_ACTIVE' => true,
             'INTERVALS'        => json_encode([
@@ -73,12 +73,20 @@ class ShellyBLURCButton4 extends IPSModule
 
         $this->RegisterVariableInteger('Battery', $this->Translate('Battery'), [
             'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
-            'ICON'           => 'battery',
+            'ICON'           => 'battery-full',
             'SUFFIX'         => ' %',
         ], 4);
 
-        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), '', 5);
-        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), '', 6);
+        $this->RegisterVariableString('Gateway', $this->Translate('Gateway'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'server',
+            'SUFFIX'         => '',
+
+        ], 5);
+        $this->RegisterVariableInteger('RSSI', $this->Translate('RSSI'), [
+            'PRESENTATION'   => VARIABLE_PRESENTATION_VALUE_PRESENTATION,
+            'ICON'           => 'signal'
+        ], 6);
 
     }
     public function ApplyChanges()
