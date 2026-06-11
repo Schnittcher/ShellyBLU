@@ -126,29 +126,49 @@ class ShellyBLUConfigurator extends IPSModule
         $Values = [];
         $Devices = json_decode($this->ReadAttributeString('Devices'), true);
         $this->SendDebug(__FUNCTION__ . ' Devices', $Devices, 0);
-        if (count($Devices) > 0) {
-            foreach ($Devices as $BLUAddress => $Device) {
-                $instanceID = $this->getShellyInstances(self::topic . '/' . $BLUAddress);
-                $guid = self::MODELS[$Device]['guid'] ?? null;
-                $name = self::MODELS[$Device]['name'] ?? $Device['name'] ?? $Device;
-                $AddValue = [
-                            'name'       => '',
-                            'BLUAddress' => $BLUAddress,
-                            'model'      => $name,
-                            'instanceID' => $instanceID,
-                            'create'     => [
-                                    'moduleID'      => $guid,
-                                    'info'          => $BLUAddress,
-                                    'configuration' => [
-                                        'Topic' => self::topic . '/' . $BLUAddress,
-                                    ]
-                            ]
-                            ];
+if (count($Devices) > 0) {
+    foreach ($Devices as $BLUAddress => $Device) {
+        $instanceID = $this->getShellyInstances(self::topic . '/' . $BLUAddress);
+        $guid = self::MODELS[$Device]['guid'] ?? null;
+        $name = self::MODELS[$Device]['name'] ?? $Device['name'] ?? $Device;
 
-                $Values[] = $AddValue;
+        if ($guid !== null) {
+            // Variante 1: GUID bekannt → direkte Konfiguration
+            $create = [
+                'moduleID'      => $guid,
+                'info'          => $BLUAddress,
+                'configuration' => [
+                    'Topic' => self::topic . '/' . $BLUAddress,
+                ]
+            ];
+        } else {
+            // Variante 3: GUID unbekannt → Auswahl aus allen bekannten Modulen
+            $create = [];
+            foreach (self::MODELS as $modelKey => $modelData) {
+                if (!empty($modelData['guid']) && !empty($modelData['name'])) {
+                    $create[$modelData['name']] = [
+                        'moduleID'      => $modelData['guid'],
+                        'info'          => $BLUAddress,
+                        'configuration' => [
+                            'Topic' => self::topic . '/' . $BLUAddress,
+                        ]
+                    ];
+                }
             }
-            $Form['actions'][0]['values'] = $Values;
         }
+
+        $AddValue = [
+            'name'       => '',
+            'BLUAddress' => $BLUAddress,
+            'model'      => $guid !== null ? $name : $this->Translate('Unknown') . ' (' . $Device . ')',
+            'instanceID' => $instanceID,
+            'create'     => $create
+        ];
+
+        $Values[] = $AddValue;
+    }
+    $Form['actions'][0]['values'] = $Values;
+}
         return json_encode($Form);
     }
 
