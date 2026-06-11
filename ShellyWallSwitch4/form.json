@@ -4,7 +4,37 @@
             "type": "ValidationTextBox",
             "name": "Topic",
             "caption": "Topic"
-        }
+        },
+		{
+        "type": "ExpansionPanel",
+        "caption": "Script Mapping",
+	    "expanded": true ,
+        "items": [
+	       { "type": "Label", "caption": "Button 1", "bold": true},
+           { "type": "SelectScript", "name": "Script-1-1", "caption": "Single" },
+	       { "type": "SelectScript", "name": "Script-1-2", "caption": "Double" },
+	       { "type": "SelectScript", "name": "Script-1-3", "caption": "Tripple" },
+	       { "type": "SelectScript", "name": "Script-1-4", "caption": "Long" },
+	   
+	       { "type": "Label", "caption": "Button 2" , "bold": true},
+           { "type": "SelectScript", "name": "Script-2-1", "caption": "Single" },
+	       { "type": "SelectScript", "name": "Script-2-2", "caption": "Double" },
+	       { "type": "SelectScript", "name": "Script-2-3", "caption": "Tripple" },
+	       { "type": "SelectScript", "name": "Script-2-4", "caption": "Long"  },
+	   
+	       { "type": "Label", "caption": "Button 3" , "bold": true},   	   
+	       { "type": "SelectScript", "name": "Script-3-1", "caption": "Single" },
+	       { "type": "SelectScript", "name": "Script-3-2", "caption": "Double" },
+	       { "type": "SelectScript", "name": "Script-3-3", "caption": "Tripple" },
+	       { "type": "SelectScript", "name": "Script-3-4", "caption": "Long"  },
+	   
+	       { "type": "Label", "caption": "Button 4" , "bold": true},	   
+	       { "type": "SelectScript", "name": "Script-4-1", "caption": "Single" },
+	       { "type": "SelectScript", "name": "Script-4-2", "caption": "Double" },
+	       { "type": "SelectScript", "name": "Script-4-3", "caption": "Tripple" },
+	       { "type": "SelectScript", "name": "Script-4-4", "caption": "Long"  }
+    ]
+}
     ],
     "actions": [
         {

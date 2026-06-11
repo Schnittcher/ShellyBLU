@@ -87,6 +87,11 @@ class ShellyWallSwitch4 extends IPSModule
             'ICON'           => 'signal'
         ], 6);
 
+        for ($btn = 1; $btn <= 4; $btn++) {
+            for ($action = 1; $action <= 4; $action++) {
+                $this->RegisterPropertyInteger('Script-'.$btn.'-'.$action, 0);
+            }
+        }
 
     }
     public function ApplyChanges()
@@ -98,8 +103,29 @@ class ShellyWallSwitch4 extends IPSModule
         $Topic = $this->ReadPropertyString('Topic');
         $this->SetReceiveDataFilter('.*' . $Topic . '.*');
 
+        // Update Reference
+        for ($btn = 1; $btn <= 4; $btn++) {
+            for ($action = 1; $action <= 4; $action++) {
+                $id = $this->ReadPropertyInteger('Script-'.$btn.'-'.$action);
+                if ($id > 1) {
+                    $this->RegisterReference($id);
+                }
+
+            }
+        }
     }
 
+    private function HandleButton(int $buttonID, int $buttonState)
+    {
+        if($buttonState<1 || $buttonState>4)
+            return;
+        $id = $this->ReadPropertyInteger('Script-'.$buttonID.'-'.$buttonState);
+
+        if ($id > 1) {
+            IPS_RunScript($id);
+        }
+    }
+    
     public function ReceiveData($JSONString)
     {
 
@@ -132,6 +158,11 @@ class ShellyWallSwitch4 extends IPSModule
                     $this->SetValue('Button2', $data['button'][1]);
                     $this->SetValue('Button3', $data['button'][2]);
                     $this->SetValue('Button4', $data['button'][3]);
+                    
+                    $this->HandleButton(1, $data['button'][0]);
+                    $this->HandleButton(2, $data['button'][1]);
+                    $this->HandleButton(3, $data['button'][2]);
+                    $this->HandleButton(4, $data['button'][3]);
                 }
             }
         }
