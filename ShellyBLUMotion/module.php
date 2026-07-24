@@ -6,6 +6,8 @@ require_once __DIR__ . '/../libs/MQTTHelper.php';
 
 class ShellyBLUMotion extends IPSModule
 {
+    use DebugHelper;
+    use MQTTHelper;
     public function Create()
     {
         parent::Create();
