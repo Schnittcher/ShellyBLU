@@ -45,6 +45,7 @@ const BTH = {
   0x5F: { n: "precipitation", t: uint16, f: 0.1 },
   0x5E: { n: "wind_direction", t: uint16, f: 0.01 },
   0x60: { n: "channel", t: uint8 },
+  0x64: { n: "light_level", t: uint8 },
   0x3C: { n: "dimmer", t: uint16 },
 };
 

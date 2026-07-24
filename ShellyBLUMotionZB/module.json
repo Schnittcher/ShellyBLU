@@ -1,0 +1,17 @@
+{
+    "id": "{B085C275-49A9-D261-F5F5-0C4B565C40D7}",
+    "name": "ShellyBLUMotionZB",
+    "type": 3,
+    "vendor": "Shelly",
+    "aliases": [
+        "Shelly BLU Motion ZB"
+    ],
+    "parentRequirements": [
+        "{043EA491-0325-4ADD-8FC2-A30C8EEB4D3F}"
+    ],
+    "childRequirements": [],
+    "implemented": [
+        "{7F7632D9-FA40-4F38-8DEA-C83CD4325A32}"
+    ],
+    "prefix": "SHELLY"
+}

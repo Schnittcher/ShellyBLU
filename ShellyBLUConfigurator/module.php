@@ -77,6 +77,11 @@ class ShellyBLUConfigurator extends IPSModule
             'name' => "Shelly BLU Distance",
             'guid' => null,
         ],
+        "SBMO-103Z"   => [
+        'name' => "Shelly BLU Motion ZB",
+        'guid' => "{B085C275-49A9-D261-F5F5-0C4B565C40D7}",
+    ],
+    
     ];
 
 
