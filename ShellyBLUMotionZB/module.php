@@ -4,7 +4,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/../libs/vendor/SymconModulHelper/DebugHelper.php';
 require_once __DIR__ . '/../libs/MQTTHelper.php';
 
-class ShellyBLUMotion extends IPSModule
+class ShellyBLUMotionZB extends IPSModule
 {
     public function Create()
     {
